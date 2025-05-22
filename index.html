@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Blog</title>
+  </head>
+  <body>
+    <nav>
+      <div class="navbar">
+        <div class="logo">
+          <img src="./photos/Future Fusion.webp" alt="my_photo" />
+          <p>
+            <b
+              ><a href="index.html"><u>Future Fusion</u></a></b
+            >
+          </p>
+        </div>
+        <div class="sections">
+          <p><a href="#" class="profile"></a></p>
+          <p><a href="Login.html" class="login">Log in</a></p>
+          <p><a href="Sign_up.html" class="Sign_up">Sign up</a></p>
+        </div>
+      </div>
+    </nav>
+    <div class="main_content">
+      <div class="container">
+        <main class="articles"></main>
+        <aside class="side_menu">
+          <div class="elements">
+            <strong><h3><a href="allUsers.html">All users</a></h3></strong>
+            <strong><h3><a href="allPosts.html">All posts</a></h3></strong>
+            <strong><h3><a href="#" onclick="setTargetUser(localStorage.getItem('currentUser'))">Your posts</a></h3></strong>
+            <strong><h3><a href="#" class="addArticle">Create a post</a></h3></strong>
+          </div>
+        </aside>
+      </div>
+    </div>
+    <footer>
+      <div class="tags">
+        <p><a href="privacy.html">Policies</a></p>
+        <p><a href="about.html">About The Blog</a></p>
+        <p><a href="contact_us.html">Contact Us</a></p>
+      </div>
+      <p>© All Rights Reserved For Future Fusion</p>
+    </footer>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
