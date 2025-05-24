@@ -1,3 +1,5 @@
+// * الفائدة منى DOMContentLoaded هو انها عند ضغط زر او ارسال فورم تنتظر جميع العناصر لتحمل ثم ترسلها الى الدالة او الصفحة المراد ارسال البيانات اليها.
+
 // * User class and related functions.
 class User {
   constructor(id, username, password, token = null, expiry = null) {
@@ -127,6 +129,9 @@ function login(username, password) {
   }
 }
 
+// * this function is checking the validity of the token.
+
+
 function checkUserTokenValidity(username) {
   let usersString = localStorage.getItem("users");
   if (!usersString) return false;
@@ -146,6 +151,7 @@ function checkUserTokenValidity(username) {
   }
 }
 
+// * This window event is checking who is the current user, and display it, also it load the event of signing up, and log in.
 document.addEventListener("DOMContentLoaded", () => {
   checkAndDisplayLoggedInUser();
 
@@ -182,6 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// * checks the current logged in user.
 function checkAndDisplayLoggedInUser() {
   let usersString = localStorage.getItem("users");
   if (!usersString) return;
@@ -221,6 +228,7 @@ function checkAndDisplayLoggedInUser() {
   }
 }
 
+// * log out function.
 function logoutUser(username) {
   let usersString = localStorage.getItem("users");
   if (!usersString) return;
@@ -250,15 +258,6 @@ function logoutUser(username) {
   }
 }
 
-// localStorage.removeItem("users");
-// signUp("Khaled_saeed", 715123);
-// console.log(localStorage.getItem("users"));
-// signUp("Khaled_saeed", 715123);
-// console.log(localStorage.getItem("users"));
-
-// login("Khaled_saeed", 715123);
-// console.log(localStorage.getItem("users"));
-
 // ! Here starts articles functions
 // * Article class and related functions.
 class Article {
@@ -272,6 +271,7 @@ class Article {
   }
 }
 
+// * Adding articles to the local storage.
 function addArticle(header, img, content) {
   let articles = [];
 
@@ -302,6 +302,7 @@ function addArticle(header, img, content) {
   window.location.href = "profile.html";
 }
 
+// * updateing articles and store them in local storage again.
 function editArticle(id, newData) {
   console.log("accessed");
 
@@ -327,6 +328,7 @@ function editArticle(id, newData) {
   return true;
 }
 
+// * deleting article from local storage.
 function deleteArticle(id) {
   console.log(id);
 
@@ -342,6 +344,7 @@ function deleteArticle(id) {
   }
 }
 
+// * showing recent added articles in the home page.
 function showRecentArticles() {
   let articlesString = localStorage.getItem("articles");
   let articles = [];
@@ -374,11 +377,12 @@ function showRecentArticles() {
       </div>
     `;
 
-    let popularArticles = document.querySelector(".articles");
-    popularArticles.innerHTML += article;
+    let recentArticles = document.querySelector(".articles");
+    recentArticles.innerHTML += article;
   }
 }
 
+// * showing the selected article to get the whole article info.
 function showArticle() {
   let header = localStorage.getItem("targetArticle");
   if (!header) return;
@@ -411,23 +415,25 @@ function showArticle() {
   }
 }
 
+// * this window event is redirecting the explorer to the loaded page
 document.addEventListener("DOMContentLoaded", () => {
   const path = window.location.pathname;
 
   if (path.includes("index.html") || path.endsWith("/")) {
     showRecentArticles();
   } else if (path.includes("article.html")) {
-    showArticle(); // بدون تمرير المعامل، لأنه سيأخذ من localStorage
+    showArticle();
     if (path.includes("profile.html")) {
       showUserProfile();
     }
   }
 });
 
+// * getting all users of the blog.
 function ShowAllUsers() {
   let usersString = localStorage.getItem("users");
   if (!usersString) return;
-  console.log("No current Users!");
+  
 
   try {
     let usersRaw = JSON.parse(usersString);
@@ -442,7 +448,7 @@ function ShowAllUsers() {
       const user = new User(u.id, u.username, u.password, u.token, u.expiry);
       let content = `
         <div class="user">
-          <h1>${user.username}</h1><hr>
+          <strong><h2><a href="#" onclick="setTargetUser('${user.username}')">${user.username}</a></h2><hr></strong>
           <strong><p>Number of Posts: ${user.posts.length}</p></strong>
         </div>
       `;
@@ -453,6 +459,7 @@ function ShowAllUsers() {
   }
 }
 
+// * getting all posts in the blog, i might do pagination, but the current posts of blog don't need any of that.
 function ShowAllPosts() {
   let articlesString = localStorage.getItem("articles");
   let articles = [];
@@ -471,6 +478,7 @@ function ShowAllPosts() {
 
   posts.innerHTML = "";
 
+  articles.sort((a, b) => new Date(b.time_created) - new Date(a.time_created));
   for (let index = 0; index < articles.length; index++) {
     let article = `
       <div class="article">
@@ -488,9 +496,9 @@ function ShowAllPosts() {
   }
 }
 
+// * This window event is for showing the profile of a specific user, either that user was you or any other user.
 window.addEventListener("DOMContentLoaded", function () {
   function showUserProfile() {
-    // الحصول على المستخدم الحالي والمستخدم المستهدف
     const currentUser = localStorage.getItem("currentUser");
     let targetUser = localStorage.getItem("targetUser");
 
@@ -518,17 +526,20 @@ window.addEventListener("DOMContentLoaded", function () {
 
     const userPosts = articles.filter((article) => article.author === username);
 
-    let content = `<h2>${username}</h2>`;
+    let content = `<h2 style="margin-right: auto;">${username}</h2>`;
 
     if (isOwner) {
-      content += `<button class="addArticle">Add article</button>`;
+      content += `<button style="margin-right: auto;" class="addArticle">Add article</button>`;
     }
 
-    content += `</h2><hr><p>Posts:</p>`;
+    content += `</h2><hr><p style="margin-right: auto;">Posts:</p>`;
 
     if (userPosts.length === 0) {
       content += `<p>No posts found.</p>`;
     } else {
+      userPosts.sort(
+        (a, b) => new Date(b.time_created) - new Date(a.time_created)
+      );
       userPosts.forEach((post) => {
         content += `
         <div class="article">
@@ -553,7 +564,6 @@ window.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    // إضافة المحتوى إلى الصفحة
     const profileContainer = document.querySelector(".Profile");
     if (profileContainer) {
       profileContainer.innerHTML = content;
@@ -571,27 +581,31 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-document.querySelector(".profile").addEventListener("click", (e) => {
-  e.preventDefault();
+// * this window event is checking the selected users to print thier info, and redirecting you to the setTargetUser function, its work only when you click on the profile anchor to show the logged in user(YOU).
+window.addEventListener("DOMContentLoaded", () => {
+  document.querySelector(".profile").addEventListener("click", (e) => {
+    e.preventDefault();
 
-  const currentUser = localStorage.getItem("currentUser");
-  if (currentUser) {
-    // تنظيف targetUser القديم وإعادة تعيينه للمستخدم الحالي
-    localStorage.removeItem("targetUser");
-    localStorage.setItem("targetUser", currentUser);
-    setTargetUser(currentUser);
-    window.location.href = "profile.html";
-  } else {
-    console.error("No user logged in");
-    window.location.href = "login.html";
-  }
+    const currentUser = localStorage.getItem("currentUser");
+    if (currentUser) {
+      localStorage.removeItem("targetUser");
+      localStorage.setItem("targetUser", currentUser);
+      setTargetUser(currentUser);
+      window.location.href = "profile.html";
+    } else {
+      console.error("No user logged in");
+      window.location.href = "login.html";
+    }
+  });
 });
 
+// * this is setting the value of selected article to view its whole info and storing it in the local storage.
 function setTargetArticle(header) {
   localStorage.setItem("targetArticle", header);
   window.location.href = "article.html";
 }
 
+// * this is setting the value of selected user to view its whole info, and articls and storing it in the local storage.
 function setTargetUser(username) {
   console.log(username);
 
@@ -599,6 +613,7 @@ function setTargetUser(username) {
   window.location.href = "profile.html";
 }
 
+// * this window event is loading the button of adding and redircting you to addArticle.html.
 document.addEventListener("DOMContentLoaded", function () {
   const addBtn = document.querySelector(".addArticle");
   if (!addBtn) return;
@@ -610,10 +625,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// * this window event is loading the form that the users made and sends elements to the addArticle Fucntion.
 window.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector(".articleForm");
   if (!form) {
-    console.error("Element is not found!");
     return;
   }
 
@@ -629,6 +644,7 @@ window.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// * this function is showing the html page of updating.
 function showUpdateArticlePage(id) {
   console.log("accessed");
 
@@ -636,6 +652,7 @@ function showUpdateArticlePage(id) {
   window.location.href = "updateArticle.html";
 }
 
+// * this window event is showing the form to update an article, and sending elements to editArticle function.
 window.addEventListener("DOMContentLoaded", () => {
   let id = Number(localStorage.getItem("editedID"));
   const articles = JSON.parse(localStorage.getItem("articles") || "[]");
@@ -664,7 +681,7 @@ window.addEventListener("DOMContentLoaded", () => {
   `;
   updatedArticle.innerHTML = content;
 
-  const form = document.querySelector(".articleForm"); // ✅ اسم النموذج الصحيح
+  const form = document.querySelector(".articleForm");
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -679,21 +696,26 @@ window.addEventListener("DOMContentLoaded", () => {
       const reader = new FileReader();
       reader.onload = function () {
         newData.img = reader.result;
-        editArticle(id, newData); // التعديل هنا بعد تحميل الصورة
-        window.location.href = "profile.html"; // ✅ إعادة التوجيه بعد نجاح التعديل
+        editArticle(id, newData);
+        window.location.href = "profile.html";
       };
       reader.readAsDataURL(imgFile);
     } else {
       editArticle(id, newData);
-      window.location.href = "profile.html"; // ✅ التوجيه في حالة ما في صورة مرفوعة
+      window.location.href = "profile.html";
     }
   });
 });
 
+
+
+// * this is calling of function that don't need to load elements using DOMContentLoaded.
 ShowAllPosts();
 ShowAllUsers();
 
-console.log(localStorage.getItem("users"));
+// ? the following lines are useless, they are the functions of adding articles and users and updating them.
+
+// console.log(localStorage.getItem("users"));
 
 // console.log(localStorage.getItem("articles"));
 

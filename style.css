@@ -7,15 +7,18 @@ body {
   flex-direction: column;
 }
 
+nav {
+  width: 100%;
+  background-color: #394c60;
+  overflow-x: hidden;
+}
+
 .main_content {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-nav {
-  width: 100%;
-  background-color: #394c60;
+  overflow: auto;
+  flex-direction: column;
 }
 
 .navbar {
@@ -75,7 +78,15 @@ nav {
   text-decoration: underline;
 }
 
-.article_1,
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  min-width: 400px;
+  overflow-x: visible;
+}
+
+/* .article_1,
 .article_2,
 .article_3,
 .article_4,
@@ -104,7 +115,7 @@ nav {
 .article_8:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
+} */
 
 /* .articles {
   display: flex;
@@ -183,12 +194,6 @@ nav {
   background-image: url("frontEnd\ development.jpg");
 } */
 
-.container {
-  display: flex;
-  flex-direction: row;
-  width: 80%;
-}
-
 .articles {
   display: flex;
   justify-content: center;
@@ -211,6 +216,7 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: 200px;
 }
 
 .elements {
@@ -218,7 +224,7 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 150px;
+
   gap: 0.5em;
   padding: 0;
   margin: 0;
@@ -232,6 +238,8 @@ nav {
   padding: 0.5em 0.75em;
   border-radius: 8px;
   transition: background-color 0.2s, color 0.2s;
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.5);
+  border: 1px solid #394c60;
 }
 
 .elements a:hover {
@@ -240,15 +248,26 @@ nav {
 }
 
 .article {
+  flex-direction: column;
   width: 90%;
   border: 3px solid #394c60;
   padding: 1em;
   margin: 1em;
   border-radius: 1em;
+  height: auto;
 }
 
 .article a {
   color: black;
+  text-decoration: none;
+}
+
+.Profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: start;
 }
 
 .edit {
@@ -306,9 +325,11 @@ nav {
 .users {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 2em;
   flex-direction: column;
   width: 90%;
+  min-width: 300px;
 }
 
 .user {
@@ -318,6 +339,17 @@ nav {
   border-radius: 1em;
   padding: 0.7em;
   margin: 0.7em;
+}
+
+.user a {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
+.user a:hover {
+  text-decoration: underline;
+  color: #394c60;
 }
 
 hr {
@@ -334,6 +366,7 @@ article {
   max-width: 1200px;
   margin: 30px auto;
   font-size: 1.1em;
+  flex-direction: column;
 }
 
 article h1 {
@@ -368,6 +401,7 @@ article p {
   transition: transform 0.3s ease;
 }
 
+
 p a {
   color: #555;
   text-decoration: none;
@@ -378,11 +412,18 @@ p a:hover {
   text-decoration: underline;
 }
 
+.posts {
+  display: flex;
+  
+  align-items: center;
+  flex-direction: column;
+}
+
 .form {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 75vh;
+  height: auto;
   flex-direction: column;
 }
 
@@ -398,16 +439,16 @@ p a:hover {
   border-top-right-radius: 5px;
 }
 
-.form form {
+.InnerForm {
   background-color: #f6f4f4;
   border: 2px solid #9d9d9d;
   border-radius: 5px;
-  width: 80%;
-  max-width: 400px;
+  min-width: 400px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  margin: 100px;
 }
 
-.form .inputs {
+.InnerForm .inputs {
   display: flex;
   flex-direction: column;
   width: 90%;
@@ -415,11 +456,11 @@ p a:hover {
   margin: 0 auto;
 }
 
-.form label {
+.InnerForm label {
   margin-top: 15px;
 }
 
-.form input,
+.InnerForm input,
 textarea {
   padding: 8px;
   margin-top: 5px;
@@ -427,20 +468,20 @@ textarea {
   border-radius: 3px;
 }
 
-.form input:focus,
-.form textarea:focus {
+.InnerForm input:focus,
+.InnerForm textarea:focus {
   outline: none;
   border-color: #527493;
   box-shadow: 0 0 5px rgba(82, 116, 147, 0.5);
   transition: all 0.3s ease;
 }
 
-.form textarea {
+.InnerForm textarea {
   resize: none;
   height: 70px;
 }
 
-.form button,
+.InnerForm button,
 .return_btn {
   margin-top: 20px;
   padding: 8px;
@@ -449,11 +490,12 @@ textarea {
   border: none;
   cursor: pointer;
   border-radius: 3px;
-  width: 30%;
+  width: auto;
+  max-width: 100px;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.form button:hover,
+.InnerForm button:hover,
 .return_btn:hover,
 .addArticle:hover {
   background-color: #527493;
@@ -462,10 +504,9 @@ textarea {
 
 .return_btn {
   position: relative;
-  left: 70%;
+  left: 400%;
   bottom: 20px;
-  width: 20%;
-  height: 10vh;
+  height: auto;
 }
 
 .articleForm {
@@ -485,7 +526,7 @@ textarea {
 }
 
 .articleForm div {
-  width: 100%;
+  /* width: 100%; */
   text-align: center;
 }
 
@@ -557,7 +598,7 @@ footer {
 
 .tags {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   justify-content: center;
   gap: 0.5em;
   padding: 1em;
@@ -567,14 +608,13 @@ footer {
   color: #f6f4f4;
   padding: 0.5em 1em;
   border-radius: 5px;
-  background-color: #333;
   text-decoration: none;
   font-size: 0.9rem;
-  white-space: nowrap;
+  /* white-space: nowrap; */
 }
 
 @media (max-width: 800px) {
-  .article_1,
+  /* .article_1,
   .article_2,
   .article_3,
   .article_4,
@@ -584,7 +624,7 @@ footer {
   .article_8 {
     width: calc(50% - 40px);
     transition: width 0.3s ease;
-  }
+  } */
 
   article {
     padding: 15px;
@@ -596,6 +636,10 @@ footer {
 
   article p {
     font-size: 1em;
+  }
+
+  .return_btn {
+    left: 250%;
   }
 }
 
@@ -637,9 +681,10 @@ footer {
 
   .article {
     width: 75%;
-    height: 40vh;
+    height: auto;
+    max-height: 50vh;
   }
-  .article_1,
+  /* .article_1,
   .article_2,
   .article_3,
   .article_4,
@@ -648,6 +693,10 @@ footer {
   .article_7,
   .article_8 {
     width: calc(100% - 40px);
+  } */
+
+  .return_btn {
+    left: 150%;
   }
 
   .tags a {

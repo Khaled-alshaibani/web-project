@@ -8,34 +8,44 @@
   </head>
   <body>
     <nav>
-      <div class="logo">
-        <img src="Future Fusion.webp" alt="my_photo" />
-        <p>
-          <b><a href="index.html">Future Fusion</a></b>
-        </p>
-      </div>
-      <div class="sections">
-        <p><a href="profile.html" class="profile"></a></p>
-        <p><a href="Login.html" class="login">Log in</a></p>
-        <p><a href="Sign_up.html" class="Sign_up">Sign up</a></p>
+      <div class="navbar">
+        <div class="logo">
+          <img src="./photos/Future Fusion.webp" alt="my_photo" />
+          <p>
+            <b><a href="index.html">Future Fusion</a></b>
+          </p>
+        </div>
+        <div class="sections">
+          <p><a href="#" class="profile"></a></p>
+          <p><a href="Login.html" class="login">Login</a></p>
+          <p><a href="Sign_up.html" class="Sign_up">Sign up</a></p>
+        </div>
       </div>
     </nav>
-    <div class="form">
-      <form action="Login">
-        <div class="header">Contact Us</div>
-        <div class="inputs">
-          <label for="username">User Name: </label>
-          <input type="text" id="username" required />
-          <label for="Email">Email: </label>
-          <input type="email" id="Email" required />
-          <label for="message">Message: </label>
-          <textarea name="Message" id="message" required></textarea>
-          <button>Send</button>
-        </div>
-      </form>
-    </div>
-    <footer style="position: fixed; bottom: 0">
-      © All Rights Reserved For Future Fusion
+    <main class="main_content">
+      <div class="form">
+        <form action="Login" class="InnerForm">
+          <div class="header">Contact Us</div>
+          <div class="inputs">
+            <label for="username">User Name: </label>
+            <input type="text" id="username" required />
+            <label for="Email">Email: </label>
+            <input type="email" id="Email" required />
+            <label for="message">Message: </label>
+            <textarea name="Message" id="message" required></textarea>
+            <button>Send</button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <footer>
+      <div class="tags">
+        <p><a href="privacy.html">Policies</a></p>
+        <p><a href="about.html">About The Blog</a></p>
+        <p><a href="contact_us.html">Contact Us</a></p>
+      </div>
+      <p>© All Rights Reserved For Future Fusion</p>
     </footer>
+    <script src="./main.js"></script>
   </body>
 </html>
