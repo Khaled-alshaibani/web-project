@@ -113,7 +113,7 @@ function login(username, password) {
     }
 
     if (signUp) {
-      signUp.innerHTML = `<a href="index.html" id="logout">Log out</a>`;
+      signUp.innerHTML = `<a href="./index.html" id="logout">Log out</a>`;
 
       document.addEventListener("click", (e) => {
         if (e.target && e.target.id === "logout") {
@@ -130,7 +130,6 @@ function login(username, password) {
 }
 
 // * this function is checking the validity of the token.
-
 
 function checkUserTokenValidity(username) {
   let usersString = localStorage.getItem("users");
@@ -165,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
       usernameIsNull = signUp(userName, password);
 
       if (usernameIsNull != null) {
-        window.location.href = "redirect.html";
+        window.location.href = "./redirect.html";
       }
     });
   }
@@ -180,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const user = login(userName, password);
 
       if (user) {
-        window.location.href = "index.html";
+        window.location.href = "./index.html";
       } else {
         alert("Login failed, user or password are not correct");
       }
@@ -213,7 +212,7 @@ function checkAndDisplayLoggedInUser() {
       }
 
       if (signUp) {
-        signUp.innerHTML = `<a href="index.html" id="logout_link">Log out</a>`;
+        signUp.innerHTML = `<a href="./index.html" id="logout_link">Log out</a>`;
       }
 
       document.addEventListener("click", (e) => {
@@ -247,11 +246,11 @@ function logoutUser(username) {
     let signUp = document.querySelector(".Sign_up");
 
     if (login) {
-      login.innerHTML = `<a href="Login.html">Login</a>`;
+      login.innerHTML = `<a href="./Login.html">Login</a>`;
     }
 
     if (signUp) {
-      signUp.innerHTML = `<a href="Sign_up.html">Sign Up</a>`;
+      signUp.innerHTML = `<a href="./Sign_up.html">Sign Up</a>`;
     }
   } catch (error) {
     console.error("Error during logout:", error);
@@ -299,7 +298,7 @@ function addArticle(header, img, content) {
 
   articles.push(article);
   localStorage.setItem("articles", JSON.stringify(articles));
-  window.location.href = "profile.html";
+  window.location.href = "./profile.html";
 }
 
 // * updateing articles and store them in local storage again.
@@ -323,7 +322,7 @@ function editArticle(id, newData) {
     articles[index].content = newData.content;
   }
 
-  window.location.href = "profile.html";
+  window.location.href = "./profile.html";
   localStorage.setItem("articles", JSON.stringify(articles));
   return true;
 }
@@ -338,7 +337,7 @@ function deleteArticle(id) {
 
     let filtered = articles.filter((article) => article.id !== id);
     localStorage.setItem("articles", JSON.stringify(filtered));
-    window.location.href = "profile.html";
+    window.location.href = "./profile.html";
   } else {
     return;
   }
@@ -433,7 +432,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function ShowAllUsers() {
   let usersString = localStorage.getItem("users");
   if (!usersString) return;
-  
 
   try {
     let usersRaw = JSON.parse(usersString);
@@ -508,7 +506,7 @@ window.addEventListener("DOMContentLoaded", function () {
     }
 
     if (!targetUser) {
-      window.location.href = "login.html";
+      window.location.href = "./login.html";
       return;
     }
     const isOwner = currentUser === targetUser;
@@ -576,7 +574,7 @@ window.addEventListener("DOMContentLoaded", function () {
     addArticleBtn.addEventListener("click", function (e) {
       e.preventDefault();
       console.log("clicked");
-      window.location.href = "addArticle.html";
+      window.location.href = "./addArticle.html";
     });
   }
 });
@@ -591,10 +589,10 @@ window.addEventListener("DOMContentLoaded", () => {
       localStorage.removeItem("targetUser");
       localStorage.setItem("targetUser", currentUser);
       setTargetUser(currentUser);
-      window.location.href = "profile.html";
+      window.location.href = "./profile.html";
     } else {
       console.error("No user logged in");
-      window.location.href = "login.html";
+      window.location.href = "./login.html";
     }
   });
 });
@@ -602,7 +600,7 @@ window.addEventListener("DOMContentLoaded", () => {
 // * this is setting the value of selected article to view its whole info and storing it in the local storage.
 function setTargetArticle(header) {
   localStorage.setItem("targetArticle", header);
-  window.location.href = "article.html";
+  window.location.href = "./article.html";
 }
 
 // * this is setting the value of selected user to view its whole info, and articls and storing it in the local storage.
@@ -610,7 +608,7 @@ function setTargetUser(username) {
   console.log(username);
 
   localStorage.setItem("targetUser", username);
-  window.location.href = "profile.html";
+  window.location.href = "./profile.html";
 }
 
 // * this window event is loading the button of adding and redircting you to addArticle.html.
@@ -621,7 +619,7 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault();
 
     console.log("clicked");
-    window.location.href = "addArticle.html";
+    window.location.href = "./addArticle.html";
   });
 });
 
@@ -649,7 +647,7 @@ function showUpdateArticlePage(id) {
   console.log("accessed");
 
   localStorage.setItem("editedID", id);
-  window.location.href = "updateArticle.html";
+  window.location.href = "./updateArticle.html";
 }
 
 // * this window event is showing the form to update an article, and sending elements to editArticle function.
@@ -697,17 +695,15 @@ window.addEventListener("DOMContentLoaded", () => {
       reader.onload = function () {
         newData.img = reader.result;
         editArticle(id, newData);
-        window.location.href = "profile.html";
+        window.location.href = "./profile.html";
       };
       reader.readAsDataURL(imgFile);
     } else {
       editArticle(id, newData);
-      window.location.href = "profile.html";
+      window.location.href = "./profile.html";
     }
   });
 });
-
-
 
 // * this is calling of function that don't need to load elements using DOMContentLoaded.
 ShowAllPosts();
