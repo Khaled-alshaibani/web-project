@@ -100,13 +100,6 @@ function login(username, password) {
     let signUp = document.querySelector(".Sign_up");
 
     if (login) {
-      // ! COME Back here
-      // ! COME Back here
-      // ! COME Back here
-      // ! COME Back here
-      // ! COME Back here
-      // ! COME Back here
-
       login.innerHTML = `<a href="#" onclick="setTargetUser(${"localStorage.getItem('currentUser')"})">${
         user.username
       }</a>`;
@@ -232,28 +225,34 @@ function logoutUser(username) {
   let usersString = localStorage.getItem("users");
   if (!usersString) return;
 
-  try {
-    let users = JSON.parse(usersString);
-    let userIndex = users.findIndex((u) => u.username === username);
-    if (userIndex !== -1) {
-      users[userIndex].token = null;
-      users[userIndex].expiry = null;
-      localStorage.setItem("users", JSON.stringify(users));
-      localStorage.removeItem("currentUser");
-    }
+  confirmed = confirm("Are you sure you want to log out?");
 
-    let login = document.querySelector(".login");
-    let signUp = document.querySelector(".Sign_up");
+  if (confirmed) {
+    try {
+      let users = JSON.parse(usersString);
+      let userIndex = users.findIndex((u) => u.username === username);
+      if (userIndex !== -1) {
+        users[userIndex].token = null;
+        users[userIndex].expiry = null;
+        localStorage.setItem("users", JSON.stringify(users));
+        localStorage.removeItem("currentUser");
+      }
 
-    if (login) {
-      login.innerHTML = `<a href="./Login.html">Login</a>`;
-    }
+      let login = document.querySelector(".login");
+      let signUp = document.querySelector(".Sign_up");
 
-    if (signUp) {
-      signUp.innerHTML = `<a href="./Sign_up.html">Sign Up</a>`;
+      if (login) {
+        login.innerHTML = `<a href="./Login.html">Login</a>`;
+      }
+
+      if (signUp) {
+        signUp.innerHTML = `<a href="./Sign_up.html">Sign Up</a>`;
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
     }
-  } catch (error) {
-    console.error("Error during logout:", error);
+  } else {
+    return;
   }
 }
 

@@ -4,6 +4,7 @@ body {
   min-height: 100vh;
   font-family: "Winky Sans", sans-serif;
   overflow-x: hidden;
+  display: flex;
   flex-direction: column;
 }
 
@@ -86,44 +87,6 @@ nav {
   overflow-x: visible;
 }
 
-/* .article_1,
-.article_2,
-.article_3,
-.article_4,
-.article_5,
-.article_6,
-.article_7,
-.article_8 {
-  width: calc(33.333% - 40px);
-  max-width: 400px;
-  height: 45vh;
-  border-radius: 10px;
-  border: 2px solid;
-  margin: 20px;
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.article_1:hover,
-.article_2:hover,
-.article_3:hover,
-.article_4:hover,
-.article_5:hover,
-.article_6:hover,
-.article_7:hover,
-.article_8:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-} */
-
-/* .articles {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-} */
-
 .articles a {
   text-decoration: none;
 }
@@ -132,67 +95,6 @@ nav {
   text-decoration: underline;
   color: #68addb;
 }
-
-.article_info {
-  background-color: white;
-  color: white;
-  padding: 20px;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  border-radius: 10px;
-}
-
-.article_info h1,
-.article_info p {
-  margin: 5px;
-}
-
-.article_info h1 a {
-  text-decoration: none;
-  color: white;
-  transition: color 0.3s ease, text-decoration 0.3s ease;
-}
-
-.article_info h1 a:hover {
-  color: #b0c7e2;
-  text-decoration: underline;
-}
-
-/* . {
-  background-image: url("Future Trends.jpg");
-}
-
-.article_2 {
-  background-image: url("web_develpment_article.jpg");
-}
-
-.article_3 {
-  background-image: url("programming languages.jpg");
-}
-
-.article_4 {
-  background-image: url("mobile development.jpg");
-}
-
-.article_5 {
-  background-image: url("AI.jpg");
-}
-
-.article_6 {
-  background-image: url("cloud\ computing.jpg");
-}
-
-.article_7 {
-  background-image: url("cybersecuricy.jpg");
-}
-
-.article_8 {
-  background-image: url("frontEnd\ development.jpg");
-} */
 
 .articles {
   display: flex;
@@ -263,6 +165,7 @@ nav {
 }
 
 .Profile {
+  min-width: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -328,7 +231,8 @@ nav {
   align-items: center;
   margin: 2em;
   flex-direction: column;
-  width: 90%;
+  min-width: 40%;
+  width: 70%;
   min-width: 300px;
 }
 
@@ -401,7 +305,6 @@ article p {
   transition: transform 0.3s ease;
 }
 
-
 p a {
   color: #555;
   text-decoration: none;
@@ -414,7 +317,7 @@ p a:hover {
 
 .posts {
   display: flex;
-  
+
   align-items: center;
   flex-direction: column;
 }
@@ -526,7 +429,6 @@ textarea {
 }
 
 .articleForm div {
-  /* width: 100%; */
   text-align: center;
 }
 
@@ -582,9 +484,6 @@ textarea {
 }
 
 footer {
-  position: relative;
-  bottom: 0;
-  margin: 0;
   width: 100%;
   height: auto;
   background-color: #394c60;
@@ -598,7 +497,6 @@ footer {
 
 .tags {
   display: flex;
-  /* flex-wrap: wrap; */
   justify-content: center;
   gap: 0.5em;
   padding: 1em;
@@ -610,22 +508,9 @@ footer {
   border-radius: 5px;
   text-decoration: none;
   font-size: 0.9rem;
-  /* white-space: nowrap; */
 }
 
 @media (max-width: 800px) {
-  /* .article_1,
-  .article_2,
-  .article_3,
-  .article_4,
-  .article_5,
-  .article_6,
-  .article_7,
-  .article_8 {
-    width: calc(50% - 40px);
-    transition: width 0.3s ease;
-  } */
-
   article {
     padding: 15px;
   }
@@ -684,16 +569,6 @@ footer {
     height: auto;
     max-height: 50vh;
   }
-  /* .article_1,
-  .article_2,
-  .article_3,
-  .article_4,
-  .article_5,
-  .article_6,
-  .article_7,
-  .article_8 {
-    width: calc(100% - 40px);
-  } */
 
   .return_btn {
     left: 150%;
